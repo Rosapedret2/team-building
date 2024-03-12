@@ -120,6 +120,9 @@
     width: 80%;
     margin-bottom: 20px;
   }
+  .frase{
+    color: aliceblue;
+  }
 
   .frase, .valores {
     flex: 1;

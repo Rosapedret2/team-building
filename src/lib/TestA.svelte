@@ -14,8 +14,8 @@
   let sumaTotal = 0;
   let todosCasosCompletos = false;
 
-  // Datos para el gráfico circular
-  let resultados = {};
+  // Datos para el gráfico de puntos
+  let resultados = [];
 
   function seleccionarValor(caso, valor) {
     caso.valorSeleccionado = valor;
@@ -33,9 +33,10 @@
   }
 
   function actualizarResultados() {
-    resultados = {
-      "Resultado": sumaTotal
-    };
+    resultados = [{
+      x: sumaTotal, // Posición en el eje X
+      y: 0// Posición en el eje Y (central)
+    }];
   }
 
   import Chart from 'chart.js/auto';
@@ -44,27 +45,40 @@
 
   $: {
     if (todosCasosCompletos) {
-      const labels = Object.keys(resultados);
-      const data = Object.values(resultados);
-
       const chartData = {
-        labels: labels,
-        datasets: [
-          {
-            data: data,
-            backgroundColor: data.map(value => (value < 0 ? "red" : "blue"))
-          }
-        ]
+        datasets: [{
+          label: 'Resultados',
+          data: resultados,
+          borderColor: 'rgba(54, 162, 235, 1)',
+          backgroundColor: 'rgba(54, 162, 235, 1)',
+          pointRadius: 8,
+          pointHoverRadius: 10,
+          pointStyle: 'circle' // Estilo de los puntos
+        }]
       };
 
       const chartConfig = {
-        type: "doughnut",
+        type: "scatter",
         data: chartData,
         options: {
-          cutout: '70%',
-          plugins: {
-            legend: {
-              display: false
+          scales: {
+            x: {
+              type: 'linear',
+              position: 'bottom',
+              min: -30, // Valor mínimo en el eje X
+              max: 30, // Valor máximo en el eje X
+              ticks: {
+                stepSize: 5 // Espaciado entre los ticks
+              }
+            },
+            y: {
+              type: 'linear',
+              position: 'left',
+              min: -30, // Valor mínimo en el eje Y
+              max: 30, // Valor máximo en el eje Y
+              ticks: {
+                stepSize: 5 // Espaciado entre los ticks
+              }
             }
           }
         }
