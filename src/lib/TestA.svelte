@@ -1,6 +1,7 @@
 <!-- src/lib/TestA.svelte -->
 <script>
   import { onMount } from "svelte";
+  import Chart from 'chart.js/auto';
 
   let casos = [
     { frasePositiva: "Soy guapa", fraseNegativa: "Soy fea", valorSeleccionado: null },
@@ -17,6 +18,8 @@
   // Datos para el gráfico de puntos
   let resultados = [];
 
+  let ctx; // Declarar la variable ctx aquí
+
   function seleccionarValor(caso, valor) {
     caso.valorSeleccionado = valor;
     calcularSumaTotal();
@@ -30,6 +33,10 @@
 
   function verificarCasosCompletos() {
     todosCasosCompletos = casos.every(caso => caso.valorSeleccionado !== null);
+    if (todosCasosCompletos) {
+      // Guardar el resultado en el almacenamiento local
+      localStorage.setItem('resultadoTestA', sumaTotal);
+    }
   }
 
   function actualizarResultados() {
@@ -38,10 +45,6 @@
       y: 0// Posición en el eje Y (central)
     }];
   }
-
-  import Chart from 'chart.js/auto';
-
-  let ctx;
 
   $: {
     if (todosCasosCompletos) {

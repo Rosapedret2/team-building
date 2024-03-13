@@ -3,6 +3,7 @@
   import { onMount } from 'svelte';
   import TestA from './lib/TestA.svelte';
   import TestB from './lib/TestB.svelte';
+  import Resultados from './lib/Resultados.svelte';
 
   let currentComponent;
 
@@ -21,14 +22,37 @@
       currentComponent = TestA;
     } else if (currentPath === '/testB') {
       currentComponent = TestB;
+    } else if (currentPath === '/resultados') {
+      // Si la ruta actual es la de resultados, cargar los resultados
+      currentComponent = Resultados;
     }
   });
+
+  function mostrarResultados() {
+    // Verificar si ambos tests están completos
+    const resultadosTestA = JSON.parse(localStorage.getItem('resultadosTestA'));
+    const resultadosTestB = JSON.parse(localStorage.getItem('resultadosTestB'));
+
+    if (resultadosTestA && resultadosTestB) {
+      // Redirigir a la página de resultados
+      window.location.href = '/resultados';
+    } else {
+      alert('Aún no has completado ambos tests.');
+    }
+  }
+
+  function limpiarResultados() {
+    // Limpiar los resultados del almacenamiento local
+    localStorage.removeItem('resultadosTestA');
+    localStorage.removeItem('resultadosTestB');
+  }
 </script>
 
 <main>
   <h1>Bienvenido a tu aplicación</h1>
   <button on:click={empezarTestA}>Empezar TestA</button>
   <button on:click={empezarTestB}>Empezar TestB</button>
+  <button on:click={mostrarResultados}>Ver Resultados</button>
 
   {#if currentComponent}
     <svelte:component this={currentComponent} />
@@ -42,7 +66,7 @@
   }
 
   main {
-    background-color: black;
+    background-color: white;
     padding: 20px; /* Añade espacio alrededor del contenido */
   }
 

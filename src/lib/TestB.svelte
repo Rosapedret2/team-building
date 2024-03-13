@@ -1,6 +1,7 @@
 <!-- src/lib/TestB.svelte -->
 <script>
   import { onMount } from "svelte";
+  import Chart from 'chart.js/auto';
 
   let casosB = [
     { frasePositiva: "Tengo éxito", fraseNegativa: "Soy un fracaso", valorSeleccionado: null },
@@ -17,6 +18,8 @@
   // Datos para el gráfico circular
   let resultadosB = {};
 
+  let ctxB; // Declarar la variable ctxB aquí
+
   function seleccionarValorB(caso, valor) {
     caso.valorSeleccionado = valor;
     calcularSumaTotalB();
@@ -30,6 +33,10 @@
 
   function verificarCasosCompletosB() {
     todosCasosCompletosB = casosB.every(caso => caso.valorSeleccionado !== null);
+    if (todosCasosCompletosB) {
+      // Guardar el resultado en el almacenamiento local
+      localStorage.setItem('resultadoTestB', sumaTotalB);
+    }
   }
 
   function actualizarResultadosB() {
@@ -37,10 +44,6 @@
       "Resultado": sumaTotalB
     };
   }
-
-  import Chart from 'chart.js/auto';
-
-  let ctxB;
 
   $: {
     if (todosCasosCompletosB) {
