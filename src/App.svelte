@@ -49,7 +49,7 @@
 </script>
 
 <main>
-  <h1>Bienvenido a tu aplicación</h1>
+  <h1>TEST PERSONALIDAD</h1>
   <button on:click={empezarTestA}>Empezar TestA</button>
   <button on:click={empezarTestB}>Empezar TestB</button>
   <button on:click={mostrarResultados}>Ver Resultados</button>
