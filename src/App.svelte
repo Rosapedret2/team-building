@@ -30,10 +30,10 @@
 
   function mostrarResultados() {
     // Verificar si ambos tests están completos
-    const resultadosTestA = JSON.parse(localStorage.getItem('resultadosTestA'));
-    const resultadosTestB = JSON.parse(localStorage.getItem('resultadosTestB'));
+    const resultadosTestA = JSON.parse(localStorage.getItem('resultadoTestA'));
+    const resultadosTestB = JSON.parse(localStorage.getItem('resultadoTestB'));
 
-    if (resultadosTestA && resultadosTestB) {
+    if (resultadosTestA !== null && resultadosTestB !== null) {
       // Redirigir a la página de resultados
       window.location.href = '/resultados';
     } else {
