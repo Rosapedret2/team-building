@@ -97,9 +97,6 @@
     h1 {
       margin-bottom: 20px;
     }
-  
-    .coordenadas {
-      font-size: 16px;
-    }
+
   </style>
   
