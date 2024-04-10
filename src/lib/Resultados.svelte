@@ -63,8 +63,7 @@
     h1 {
       margin-bottom: 20px;
     }
-<<<<<<< HEAD
-  
+    
     .grafico {
       position: relative;
       width: 400px; /* Ancho del gráfico */
@@ -124,8 +123,5 @@
     .coordenadas {
       font-size: 16px;
     }
-=======
-
->>>>>>> d02097008c2730025af942f2820152c93e9550ce
   </style>
   
